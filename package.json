@@ -1,5 +1,5 @@
 {
-  "name": "dispatcher",
+  "name": "promise-dispatcher",
   "version": "1.0.0",
   "description": "A simple way to handle messages via modules that expose their funcionality as promises",
   "main": "index.js",
