@@ -1,0 +1,30 @@
+{
+  "name": "dispatcher",
+  "version": "1.0.0",
+  "description": "A simple way to handle messages via modules that expose their funcionality as promises",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bsgbryan/dispatcher.git"
+  },
+  "keywords": [
+    "dispatch",
+    "route"
+  ],
+  "author": "Bryan Maynard <bsgbryan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bsgbryan/dispatcher/issues"
+  },
+  "homepage": "https://github.com/bsgbryan/dispatcher",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "docco": "^0.6.3"
+  },
+  "dependencies": {
+    "q": "^1.0.1"
+  }
+}
