@@ -1,6 +1,6 @@
 {
   "name": "promise-dispatcher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple way to handle messages via modules that expose their funcionality as promises",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "docco": "^0.6.3"
   },
   "dependencies": {
+    "instrumentor": "^1.0.2",
     "q": "^1.0.1"
   }
 }

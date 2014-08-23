@@ -1,5 +1,5 @@
 Overview
-========
+--------
 
 dispatcher is a very simple way to handle a message with a defined action.
 
@@ -8,6 +8,8 @@ dispatcher is a very simple way to handle a message with a defined action.
 
 	module.exports = (message, spark) ->
 		req = message.action
+
+		console.log "location #{ __dirname }"
 
 		if !modules[req]
 			modules[req] = instrumentor.instrument './promises/' + req
