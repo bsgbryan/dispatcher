@@ -30,7 +30,7 @@ Get it
 Set it's root
 -------------
 
-Doing this tells `dispatcher` where you store the modules you're going to dispatching messages to.
+Doing this tells `dispatcher` where you store the modules you're going to dispatch messages to.
 
 ```javascript
   dispatcher.root = '/the/common/path/for/all/your/modules'
