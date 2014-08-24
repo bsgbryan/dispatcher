@@ -47,12 +47,13 @@ events (`then`, `progress`, and `fail`). Listeners are described in more detail 
 ```
 
 You can pass a websocket as a listener. Doing so gives you duplexed websocket communication
-essentially for free.
+essentially for free. You could also wrap express middleware and pass it as a listener for super
+simple http request handling.
 
 Listeners
 =========
 
-Any module that has a `send` method that takes the correct arguments can be a listener.
+Any module that has a `send` method and takes the correct arguments can be a listener.
 
 `send` has the following signature:
 
@@ -73,12 +74,28 @@ Dispatchable
 An example dispatchable module is shown below:
 
 ```javascript
-  module.exports = function get_pizza(message) {
-    console.log(message.action) // 'get/pizza', 'get:pizza', or whatever
+  var q = require('q') // For promises
 
-    Object.keys(message).forEach(function (property) {
-      // One of these properties will be 'action'
-      // The rest can be used as arguments by the module
-    })
+  module.exports = function get_pizza(message) {
+    var deferred = q.defer()
+
+    console.log(message.action) // 'get/pizza', 'get_pizza', or whatever
+
+    // Do some... work
+    setTimeout (function pizza_delivered() {
+      var slices_left = 8
+      var eating      = true
+
+      while (eating) {
+        console.log(message.catchphrase) // 'Cowabunga!'
+        if (--slices_left == 0)
+          eating = false
+        deferred.notify('Only ' + slices_left + '!')
+      }
+
+      deferred.reslove('I LOVE BEING A TURTLE')
+    }, 2000) // Delivery takes time
+
+    return deferred.promise
   }
 ```
