@@ -9,16 +9,16 @@ dispatcher is a very simple way to handle a message with a defined action.
 dispatch
 --------
 
-    dispatch = (message, spark) ->
+    dispatch = (message, listener) ->
       req  = message.action
 
       if !modules[req]
         modules[req] = instrumentor.instrument req
       
       modules[req] message
-        .then     (result) -> spark.send 'response', request: req, result: result
-        .fail     (error ) -> spark.send 'error',    request: req, error:  error
-        .progress (update) -> spark.send 'progress', request: req, update: update
+        .then     (result) -> listener.send 'resolve',  action: req, result: result if listener?
+        .fail     (error ) -> listener.send 'fail',     action: req, error:  error  if listener?
+        .progress (update) -> listener.send 'progress', action: req, update: update if listener?
 
 root
 ----

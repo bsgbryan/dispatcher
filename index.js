@@ -6,27 +6,33 @@
 
   modules = {};
 
-  dispatch = function(message, spark) {
+  dispatch = function(message, listener) {
     var req;
     req = message.action;
     if (!modules[req]) {
       modules[req] = instrumentor.instrument(req);
     }
     return modules[req](message).then(function(result) {
-      return spark.send('response', {
-        request: req,
-        result: result
-      });
+      if (listener != null) {
+        return listener.send('response', {
+          action: req,
+          result: result
+        });
+      }
     }).fail(function(error) {
-      return spark.send('error', {
-        request: req,
-        error: error
-      });
+      if (listener != null) {
+        return listener.send('error', {
+          action: req,
+          error: error
+        });
+      }
     }).progress(function(update) {
-      return spark.send('progress', {
-        request: req,
-        update: update
-      });
+      if (listener != null) {
+        return listener.send('progress', {
+          action: req,
+          update: update
+        });
+      }
     });
   };
 
