@@ -12,8 +12,8 @@ message as the module name to `require`.
 message
 -------
 
-The only required property is `action`. The message is passed directly to the required module,
-so any other properties make it to the dispatched module.
+`message` is the first argument to the `dispatch` method. The only required property on `message`
+is `action`. `message` is passed directly to the module specified by `message.action`, so any other properties on `message` make it to the dispatched module.
 
 How to use
 ==========
@@ -64,5 +64,21 @@ Any module that has a `send` method that takes the correct arguments can be a li
       // info will be { action: message.action, error: dispatched_module_error }
     else if (event === 'progress')
       // info will be { action: message.action, update: dispatched_module_update }
+  }
+```
+
+Dispatchable
+============
+
+An example dispatchable module is shown below:
+
+```javascript
+  module.exports = function get_pizza(message) {
+    console.log(message.action) // 'get/pizza', 'get:pizza', or whatever
+
+    Object.keys(message).forEach(function (property) {
+      // One of these properties will be 'action'
+      // The rest can be used as arguments by the module
+    })
   }
 ```
