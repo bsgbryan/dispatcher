@@ -3,7 +3,7 @@ Overview
 
 dispatcher provides a simple way to process websocket messages that define an action.
 
-dispatcher is used by [instrumentor](https://github.com/bsgbryan/instrumentor), allowing you
+dispatcher uses [instrumentor](https://github.com/bsgbryan/instrumentor), allowing you
 to wrap dispatched modules in additional behavior.
 
 dispatcher handles requiring modules for you - dispatcher uses the `action` property of your
