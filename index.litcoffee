@@ -20,14 +20,14 @@ dispatch
         .fail     (error ) -> listener.send 'fail',     action: req, error:  error  if listener?
         .progress (update) -> listener.send 'progress', action: req, update: update if listener?
 
-root
-----
+instrument
+----------
 
-    root = (path) -> instrumentor.root = path
+    instrument = (module) -> instrumentor.use module
 
 Public interface
 ----------------
 
     module.exports = 
-      dispatch: dispatch
-      root:     root
+      dispatch:   dispatch
+      instrument: instrument
